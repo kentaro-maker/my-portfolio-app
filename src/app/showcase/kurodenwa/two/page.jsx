@@ -21,7 +21,7 @@ export default function MyComponent() {
   )
 }
 
-export function Model(props) {
+function Model(props) {
   const { nodes, materials } = useGLTF('/kurodenwa.gltf')
   const [hovered, hover] = useState(false);
   const [rotated, rotate] = useState(false);
