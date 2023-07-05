@@ -14,7 +14,6 @@ import { useGLTF, Stage, useCursor, Grid, OrbitControls, Environment, PivotContr
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import {useKeyPressEvent, useKeyPress} from 'react-use';
 
-
 const MeshBasicMaterial = forwardRef((props, ref) => {
   return (
     <meshStandardMaterial ref={ref}>
@@ -22,13 +21,12 @@ const MeshBasicMaterial = forwardRef((props, ref) => {
     </meshStandardMaterial>
     )
   })
-  
+
 const AnimatedMeshBasicMaterial = animated(MeshBasicMaterial)
 
 const Phone = forwardRef(({}, ref) => {
   const [vector2] = useState(() => new Vector2())
   const [hovered, hover] = useState(false);
-
 
   const [springs, api] = useSpring(
     () => ({
@@ -49,7 +47,6 @@ const Phone = forwardRef(({}, ref) => {
     getCurrentPosition: () => vector2,
   }))
 
-
   const handleHover = (e) => {
     console.log(e)
     if(e.type == "keydown") hover(true)
@@ -62,21 +59,18 @@ const Phone = forwardRef(({}, ref) => {
 
   useKeyPressEvent(' ', handleHover, handleHover);
 
-
-
   const handleClick = useCallback(() => {
     let clicked = false
 
     return () => {
       clicked = !clicked
 
-
       api.start({
         color: clicked ? '#569AFF' : '#ff6d6d',
         position: clicked? [0, 1, 0] :  [0,0,0],
       })
     }
-  }, [])
+  }, [api])
   
   return (
     <animated.mesh
@@ -93,9 +87,6 @@ const Phone = forwardRef(({}, ref) => {
   )
 })
 
-
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-
 const Body = forwardRef(({}, ref) => {
   const [rotated, rotate] = useState(false);
 
@@ -110,7 +101,16 @@ const Body = forwardRef(({}, ref) => {
     })
   }
 
-  for (const key of keys) useKeyPressEvent(key, handleNum, handleNum)
+  useKeyPressEvent(1, handleNum, handleNum)
+  useKeyPressEvent(2, handleNum, handleNum)
+  useKeyPressEvent(3, handleNum, handleNum)
+  useKeyPressEvent(4, handleNum, handleNum)
+  useKeyPressEvent(5, handleNum, handleNum)
+  useKeyPressEvent(6, handleNum, handleNum)
+  useKeyPressEvent(7, handleNum, handleNum)
+  useKeyPressEvent(8, handleNum, handleNum)
+  useKeyPressEvent(9, handleNum, handleNum)
+  useKeyPressEvent(0, handleNum, handleNum)
   
 
 
@@ -191,3 +191,7 @@ export default function MyComponent() {
     </>
   )
 }
+
+MeshBasicMaterial.displayName = 'MeshBasicMaterial'
+Phone.displayName = 'Phone'
+Body.displayName = 'Body'

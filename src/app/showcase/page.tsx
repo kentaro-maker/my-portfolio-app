@@ -87,7 +87,7 @@ export default function Showcase() {
             <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">My Site / Showcase</h1>
           </div>
           {links.map((site, siteIndex) => (
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <div key={siteIndex} className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
               <Link
                 href={site.link}
                 className="mt-10 text-center text-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500">

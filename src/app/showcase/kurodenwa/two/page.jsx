@@ -21,7 +21,6 @@ export default function MyComponent() {
   )
 }
 
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 export function Model(props) {
   const { nodes, materials } = useGLTF('/kurodenwa.gltf')
   const [hovered, hover] = useState(false);
@@ -46,7 +45,16 @@ export function Model(props) {
     console.log("rotate is " + (rotated ? "true" : "false"))
 
   }
-  for (const key of keys) useKeyPressEvent(key, handleRotate, handleRotate)
+  useKeyPressEvent(1, handleRotate, handleRotate)
+  useKeyPressEvent(2, handleRotate, handleRotate)
+  useKeyPressEvent(3, handleRotate, handleRotate)
+  useKeyPressEvent(4, handleRotate, handleRotate)
+  useKeyPressEvent(5, handleRotate, handleRotate)
+  useKeyPressEvent(6, handleRotate, handleRotate)
+  useKeyPressEvent(7, handleRotate, handleRotate)
+  useKeyPressEvent(8, handleRotate, handleRotate)
+  useKeyPressEvent(9, handleRotate, handleRotate)
+  useKeyPressEvent(0, handleRotate, handleRotate)
 
 
 
