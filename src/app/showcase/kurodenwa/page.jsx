@@ -169,7 +169,7 @@ export default function MyComponent() {
   useEffect(() => {
     console.log(focused ? 'Focused' : 'Noooot Focused')
     focused ?  inputEl.current.focus() :inputEl.current.blur()
-    focused ?  inputEl2.current.focus() :inputEl2.current.blur()
+    // focused ?  inputEl2.current.focus() :inputEl2.current.blur()
   }, [focused])
 
   const handlerFocus = () => {
@@ -190,7 +190,7 @@ export default function MyComponent() {
   return (
     <>
     <input className=" " ref={inputEl} type="text" readOnly />
-    <input className=" " ref={inputEl2} type="text" />
+    {/* <input className=" " ref={inputEl2} type="text" /> */}
     <Canvas gl={{ logarithmicDepthBuffer: true }} shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
       <ambientLight intensity={0.8} />
       <pointLight intensity={1} position={[0, 6, 0]} />
