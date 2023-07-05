@@ -24,7 +24,7 @@ const MeshBasicMaterial = forwardRef((props, ref) => {
 
 const AnimatedMeshBasicMaterial = animated(MeshBasicMaterial)
 
-const Phone = forwardRef(({}, ref) => {
+const Phone = forwardRef(({ handler }, ref) => {
   const [vector2] = useState(() => new Vector2())
   const [hovered, hover] = useState(false);
 
@@ -87,7 +87,7 @@ const Phone = forwardRef(({}, ref) => {
   )
 })
 
-const Body = forwardRef(({}, ref) => {
+const Body = forwardRef(({ handler }, ref) => {
   const [rotated, rotate] = useState(false);
 
   const handleNum = (e) => {
@@ -101,16 +101,16 @@ const Body = forwardRef(({}, ref) => {
     })
   }
 
-  useKeyPressEvent(1, handleNum, handleNum)
-  useKeyPressEvent(2, handleNum, handleNum)
-  useKeyPressEvent(3, handleNum, handleNum)
-  useKeyPressEvent(4, handleNum, handleNum)
-  useKeyPressEvent(5, handleNum, handleNum)
-  useKeyPressEvent(6, handleNum, handleNum)
-  useKeyPressEvent(7, handleNum, handleNum)
-  useKeyPressEvent(8, handleNum, handleNum)
-  useKeyPressEvent(9, handleNum, handleNum)
-  useKeyPressEvent(0, handleNum, handleNum)
+  useKeyPressEvent("1", handleNum, handleNum)
+  useKeyPressEvent("2", handleNum, handleNum)
+  useKeyPressEvent("3", handleNum, handleNum)
+  useKeyPressEvent("4", handleNum, handleNum)
+  useKeyPressEvent("5", handleNum, handleNum)
+  useKeyPressEvent("6", handleNum, handleNum)
+  useKeyPressEvent("7", handleNum, handleNum)
+  useKeyPressEvent("8", handleNum, handleNum)
+  useKeyPressEvent("9", handleNum, handleNum)
+  useKeyPressEvent("0", handleNum, handleNum)
   
 
 
@@ -134,7 +134,7 @@ const Body = forwardRef(({}, ref) => {
   )
 
   return (
-    <group ref={ref} position={[0,-0.7,0]}>
+    <group ref={ref} position={[0,-0.7,0]} onClick={()=>handler()}>
       <mesh>
         <boxGeometry args={[1.5, 1.5, 1.5]}  />
         <meshStandardMaterial color="hotpink" />
@@ -163,6 +163,17 @@ const Body = forwardRef(({}, ref) => {
 export default function MyComponent() {
   const blobApi = useRef(null)
 
+  const [focused, focus] = useState(false)
+  const inputEl = useRef(null);
+  useEffect(() => {
+    console.log(focused ? 'Focused' : 'Noooot Focused')
+  }, [focused])
+
+  const handlerFocus = () => {
+    focus(!focused)
+    focused ?  inputEl.current.focus() :inputEl.current.blur()
+  }
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (blobApi.current) {
@@ -176,6 +187,7 @@ export default function MyComponent() {
 
   return (
     <>
+    <input className="hidden absolute " ref={inputEl} type="text" readOnly />
     <Canvas gl={{ logarithmicDepthBuffer: true }} shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
       <ambientLight intensity={0.8} />
       <pointLight intensity={1} position={[0, 6, 0]} />
@@ -186,7 +198,7 @@ export default function MyComponent() {
       </EffectComposer>
       <Environment background preset="sunset" blur={0.8} />
       <Phone ref={blobApi} />
-      <Body />
+      <Body handler={handlerFocus} />
     </Canvas>
     </>
   )

@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, Suspense } from 'react'
+import { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Grid, OrbitControls, Stage, PivotControls } from '@react-three/drei'
 import { useGLTF } from "@react-three/drei";
@@ -9,15 +9,29 @@ import { useSpring, animated } from '@react-spring/three'
 
 export default function MyComponent() {
   const ref = useRef()
+  const [focused, focus] = useState(false)
+  const inputEl = useRef(null);
+  useEffect(() => {
+    console.log(focused ? 'Focused' : 'Noooot Focused')
+  }, [focused])
+
+  const handlerFocus = () => {
+    focus(!focused)
+    focused ?  inputEl.current.focus() :inputEl.current.blur()
+  }
+
   return (
-    <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
-      <Suspense fallback={null}>
-        <Stage controls={ref} preset="rembrandt" intensity={1}  environment="city">
-          <Model />
-        </Stage>
-      </Suspense>
-      <OrbitControls ref={ref} autoRotate />
-    </Canvas>
+    <>
+      <input className="hidden absolute" ref={inputEl} type="text" readOnly />
+      <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
+        <Suspense fallback={null}>
+          <Stage controls={ref} preset="rembrandt" intensity={1}  environment="city">
+            <Model handler={handlerFocus} />
+          </Stage>
+        </Suspense>
+        <OrbitControls ref={ref} autoRotate />
+      </Canvas>
+    </>
   )
 }
 
@@ -45,16 +59,16 @@ function Model(props) {
     console.log("rotate is " + (rotated ? "true" : "false"))
 
   }
-  useKeyPressEvent(1, handleRotate, handleRotate)
-  useKeyPressEvent(2, handleRotate, handleRotate)
-  useKeyPressEvent(3, handleRotate, handleRotate)
-  useKeyPressEvent(4, handleRotate, handleRotate)
-  useKeyPressEvent(5, handleRotate, handleRotate)
-  useKeyPressEvent(6, handleRotate, handleRotate)
-  useKeyPressEvent(7, handleRotate, handleRotate)
-  useKeyPressEvent(8, handleRotate, handleRotate)
-  useKeyPressEvent(9, handleRotate, handleRotate)
-  useKeyPressEvent(0, handleRotate, handleRotate)
+  useKeyPressEvent("1", handleRotate, handleRotate)
+  useKeyPressEvent("2", handleRotate, handleRotate)
+  useKeyPressEvent("3", handleRotate, handleRotate)
+  useKeyPressEvent("4", handleRotate, handleRotate)
+  useKeyPressEvent("5", handleRotate, handleRotate)
+  useKeyPressEvent("6", handleRotate, handleRotate)
+  useKeyPressEvent("7", handleRotate, handleRotate)
+  useKeyPressEvent("8", handleRotate, handleRotate)
+  useKeyPressEvent("9", handleRotate, handleRotate)
+  useKeyPressEvent("0", handleRotate, handleRotate)
 
 
 
@@ -70,7 +84,7 @@ function Model(props) {
   useKeyPressEvent(' ', handleHover, handleHover);
 
   return (  
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} onClick={ () => props.handler() }>
       <animated.group position={springs.position}>
         <mesh geometry={nodes.HandData.geometry} material={materials.Body} />
         <mesh geometry={nodes.HandData_1.geometry} material={materials.Body} />
