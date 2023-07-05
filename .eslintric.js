@@ -4,6 +4,7 @@ module.exports = {
     "eslint:recommended",
     "next", 
     "next/core-web-vitals",
-    "prettier"
+    "prettier",
+    "next/babel"
   ]
 }
