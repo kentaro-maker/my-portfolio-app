@@ -38,21 +38,25 @@ const Button = ({ className, children, value, downEvent, upEvent }: ButtonProps)
   }, [pressed]);
 
   const down = () => {
-    console.log('mousedown')
+    console.log('pointerdown')
     set(true)
   }
   const up = () => {
-    console.log('mouseup')
+    console.log('pointerup')
     set(false)
   }
 
   useEffect(() => {
-    on(ref.current, 'mousedown', down);
-    on(ref.current, 'mouseup', up);
+    // on(ref.current, 'mousedown', down);
+    // on(ref.current, 'mouseup', up);
+    on(ref.current, 'pointerdown', down);
+    on(ref.current, 'pointerup', up);
     
     return () => {
-        off(ref.current, 'mousedown', down);
-        off(ref.current, 'mouseup', up);
+        // off(ref.current, 'mousedown', down);
+        // off(ref.current, 'mouseup', up);
+        off(ref.current, 'pointerdown', down);
+        off(ref.current, 'pointerup', up);
     };
   }, [ref.current]);
 
