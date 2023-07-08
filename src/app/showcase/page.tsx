@@ -1,3 +1,4 @@
+import React from 'react'
 import Link from 'next/link'
 import { showcase, SiteProps } from '@/showcase'
 import { Footer } from '@/components/Footer'
@@ -56,6 +57,10 @@ const links = [
   {
     name: "黒電話",
      link: "/showcase/kurodenwa/two",
+  },
+  {
+    name: "virtual keyboard",
+     link: "/showcase/keyboard",
   }
 ]
 export default function Showcase() {

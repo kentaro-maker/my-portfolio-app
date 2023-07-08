@@ -1,18 +1,12 @@
 "use client";
-import {
-  useRef,
-  useEffect,
-  useCallback,
-  forwardRef,
-  useState,
-  useImperativeHandle,
-} from 'react'
+import React, { useRef, useEffect, useCallback, forwardRef, useState, useImperativeHandle } from 'react'
 import { useSpring, animated } from '@react-spring/three'
 import { Canvas, useFrame} from '@react-three/fiber'
 import { Vector2 } from 'three'
 import { useGLTF, Stage, useCursor, Grid, OrbitControls, Environment, PivotControls } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import {useKeyPressEvent, useKeyPress} from 'react-use';
+import KeyButton from '@/components/KeyButton';
 
 const MeshBasicMaterial = forwardRef((props, ref) => {
   return (
@@ -87,7 +81,7 @@ const Phone = forwardRef(({ handler }, ref) => {
   )
 })
 
-const Body = forwardRef(({ handler }, ref) => {
+const Body = forwardRef(({  }, ref) => {
   const [rotated, rotate] = useState(false);
 
   const handleNum = (e) => {
@@ -134,7 +128,7 @@ const Body = forwardRef(({ handler }, ref) => {
   )
 
   return (
-    <group ref={ref} position={[0,-0.7,0]} onClick={()=>handler()}>
+    <group ref={ref} position={[0,-0.7,0]}>
       <mesh>
         <boxGeometry args={[1.5, 1.5, 1.5]}  />
         <meshStandardMaterial color="hotpink" />
@@ -163,50 +157,45 @@ const Body = forwardRef(({ handler }, ref) => {
 export default function MyComponent() {
   const blobApi = useRef(null)
 
-  const [focused, focus] = useState(false)
-  const inputEl = useRef(null);
-  const inputEl2 = useRef(null);
-  useEffect(() => {
-    console.log(focused ? 'Focused' : 'Noooot Focused')
-    focused ?  inputEl.current.focus() :inputEl.current.blur()
-    // focused ?  inputEl2.current.focus() :inputEl2.current.blur()
-  }, [focused])
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (blobApi.current) {
+  //       const { x, y } = blobApi.current.getCurrentPosition()
+  //       console.log('the blob is at position', { x, y })
+  //     }
+  //   }, 2000)
 
-  const handlerFocus = () => {
-    focus(!focused)
+  //   return () => clearInterval(interval)
+  // }, [])
+
+
+  const down = (value) => {
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+      key: value,
+    }))
   }
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (blobApi.current) {
-        const { x, y } = blobApi.current.getCurrentPosition()
-        console.log('the blob is at position', { x, y })
-      }
-    }, 2000)
-
-    return () => clearInterval(interval)
-  }, [])
-
+  const up = (value) => {
+    window.dispatchEvent(new KeyboardEvent('keyup', {
+      key: value,
+    }))
+  }
   return (
     <>
-    <input className=" " ref={inputEl} type="text" readOnly />
-    {/* <input className=" " ref={inputEl2} type="text" /> */}
-    <Canvas gl={{ logarithmicDepthBuffer: true }} shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
-      <ambientLight intensity={0.8} />
-      <pointLight intensity={1} position={[0, 6, 0]} />
-      <Grid renderOrder={-1} position={[0, -1.85, 0]} infiniteGrid cellSize={0.6} cellThickness={0.6} sectionSize={3.3} sectionThickness={1.5} sectionColor={[0.5, 0.5, 10]} fadeDistance={30} />
-      <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={ 0 } maxPolarAngle={Math.PI / 2} />
-      <EffectComposer disableNormalPass>
-        <Bloom luminanceThreshold={1} mipmapBlur />
-      </EffectComposer>
-      <Environment background preset="sunset" blur={0.8} />
-      <Phone ref={blobApi} />
-      <Body handler={handlerFocus} />
-    </Canvas>
+      <KeyButton downEvent={down} upEvent={up} />
+      <div id="canvas-container" className="relative h-screen w-screen">
+        <Canvas gl={{ logarithmicDepthBuffer: true }} shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
+          <ambientLight intensity={0.8} />
+          <pointLight intensity={1} position={[0, 6, 0]} />
+          <Grid renderOrder={-1} position={[0, -1.85, 0]} infiniteGrid cellSize={0.6} cellThickness={0.6} sectionSize={3.3} sectionThickness={1.5} sectionColor={[0.5, 0.5, 10]} fadeDistance={30} />
+          <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={ 0 } maxPolarAngle={Math.PI / 2} />
+          <EffectComposer disableNormalPass>
+            <Bloom luminanceThreshold={1} mipmapBlur />
+          </EffectComposer>
+          <Environment background preset="sunset" blur={0.8} />
+          <Phone ref={blobApi} />
+          <Body />
+        </Canvas>
+      </div>
     </>
   )
 }
-
-MeshBasicMaterial.displayName = 'MeshBasicMaterial'
-Phone.displayName = 'Phone'
-Body.displayName = 'Body'

@@ -5,28 +5,29 @@ import { Grid, OrbitControls, Stage, PivotControls } from '@react-three/drei'
 import { useGLTF } from "@react-three/drei";
 import {useKeyPressEvent, useKeyPress} from 'react-use';
 import { useSpring, animated } from '@react-spring/three'
+import KeyButton from '@/components/KeyButton';
 
-
-export default function MyComponent() {
+export default function Page() {
   const ref = useRef()
-  const [focused, focus] = useState(false)
-  const inputEl = useRef(null);
-  useEffect(() => {
-    console.log(focused ? 'Focused' : 'Noooot Focused')
-  }, [focused])
 
-  const handlerFocus = () => {
-    focus(!focused)
-    focused ?  inputEl.current.focus() :inputEl.current.blur()
+  const down = (value) => {
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+      key: value,
+    }))
   }
-
+  const up = (value) => {
+    window.dispatchEvent(new KeyboardEvent('keyup', {
+      key: value,
+    }))
+  }
+  
   return (
     <>
-      <input className="hidden absolute" ref={inputEl} type="text" readOnly />
+      <KeyButton downEvent={down} upEvent={up} />
       <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
         <Suspense fallback={null}>
           <Stage controls={ref} preset="rembrandt" intensity={1}  environment="city">
-            <Model handler={handlerFocus} />
+            <Model />
           </Stage>
         </Suspense>
         <OrbitControls ref={ref} autoRotate />
@@ -84,7 +85,7 @@ function Model(props) {
   useKeyPressEvent(' ', handleHover, handleHover);
 
   return (  
-    <group {...props} dispose={null} onClick={ () => props.handler() }>
+    <group {...props} dispose={null}>
       <animated.group position={springs.position}>
         <mesh geometry={nodes.HandData.geometry} material={materials.Body} />
         <mesh geometry={nodes.HandData_1.geometry} material={materials.Body} />
