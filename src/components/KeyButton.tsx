@@ -85,7 +85,7 @@ const KeyButton: React.FC<KeyboardProps> = ({downEvent = downHandler, upEvent = 
 
   return (
     <>
-      <div className="select-none absolute p-4 bottom-0 grid gap-x-2 gap-y-4 grid-cols-3 z-50">
+      <div className="absolute p-4 bottom-0 grid gap-x-2 gap-y-4 grid-cols-3 z-50">
         <Button downEvent={downEvent} upEvent={upEvent} value="1">1</Button>
         <Button downEvent={downEvent} upEvent={upEvent} value="2">2</Button>
         <Button downEvent={downEvent} upEvent={upEvent} value="3">3</Button>

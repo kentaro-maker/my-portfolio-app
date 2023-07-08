@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full bg-white">
-      <body className={`${inter.className} h-full`}>{children}</body>
+      <body className={`select-text	 ${inter.className} h-full`}>{children}</body>
     </html>
   )
 }
