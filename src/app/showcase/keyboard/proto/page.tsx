@@ -8,7 +8,7 @@ import KeyBoardProto, { Handler } from './Keyboard-proto';
 import { useKey, useKeyPressEvent, useUpdateEffect } from 'react-use';
 
 
-export const key_filter = ['1','2','3','4','q','w','e','r','a','s','d','f','z','x','c','v',' ']
+const key_filter = ['1','2','3','4','q','w','e','r','a','s','d','f','z','x','c','v',' ']
 
 const Page = () => {
   const ref = useRef({} as Handler)
