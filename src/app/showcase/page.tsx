@@ -51,16 +51,24 @@ const links = [
     link: "/",
   },
   {
-    name: "黒電話プロト",
+    name: "Black Phone Prototype",
+     link: "/showcase/kurodenwa/proto",
+  },
+  {
+    name: "Black Phone",
      link: "/showcase/kurodenwa",
   },
   {
-    name: "黒電話",
-     link: "/showcase/kurodenwa/two",
+    name: "KeyButton",
+     link: "/showcase/keybutton",
   },
   {
-    name: "virtual keyboard",
+    name: "KeyBoard",
      link: "/showcase/keyboard",
+  },
+  {
+    name: "KeyBoard Prototype",
+     link: "/showcase/keyboard/proto",
   }
 ]
 export default function Showcase() {
