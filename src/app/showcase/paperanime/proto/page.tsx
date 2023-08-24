@@ -49,7 +49,7 @@ interface GLTFAction extends THREE.AnimationClip {
   name: ActionName;
 }
 
-export function Model(props: JSX.IntrinsicElements["group"]) {
+function Model(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
   const { nodes, materials, animations } = useGLTF(
     "/PaperRoller.gltf"
