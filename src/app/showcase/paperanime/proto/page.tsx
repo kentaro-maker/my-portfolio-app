@@ -14,7 +14,7 @@ const Page = () => {
        <Canvas shadows dpr={[1, 2]} camera={{ position: [-5, 5.5, 5], fov: 40 }}>
           <Stage preset="rembrandt" intensity={1}  environment="city">
             <Suspense fallback={null}>
-              <Model />
+              <Paper />
             </Suspense>
           </Stage>
           <OrbitControls  makeDefault  minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
@@ -49,7 +49,7 @@ interface GLTFAction extends THREE.AnimationClip {
   name: ActionName;
 }
 
-function Model(props: JSX.IntrinsicElements["group"]) {
+function Paper(props: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
   const { nodes, materials, animations } = useGLTF(
     "/PaperRoller.gltf"
