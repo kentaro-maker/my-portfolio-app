@@ -4,7 +4,15 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
-  reactStrictMode: false
+  reactStrictMode: false,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+      },
+    ],
+  },
 }
 const withMDX = require('@next/mdx')()
 

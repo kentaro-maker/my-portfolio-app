@@ -69,8 +69,65 @@ const links = [
   {
     name: "KeyBoard Prototype",
      link: "/showcase/keyboard/proto",
+  },
+  {
+    name: "PDF",
+     link: "/showcase/pdf",
+  },
+  {
+    name: "PDF Prototype",
+     link: "/showcase/pdf/proto",
+  },
+  {
+    name: "Typewriter Prototype",
+     link: "/showcase/typewriter/proto",
+  },
+  {
+    name: "Pen Position",
+     link: "/showcase/penpos",
+  },
+  {
+    name: "Memo Proto",
+     link: "/showcase/memo/proto",
+  },
+  {
+    name: "PaperAnime Proto",
+     link: "/showcase/paperanime/proto",
+  },
+  {
+    name: "AlphaMap Experiment",
+     link: "/showcase/alphamap",
+  },
+  {
+    name: "Canvas FillText",
+     link: "/showcase/canvasfilltext",
+  },
+  {
+    name: "Cube Presentation",
+     link: "/showcase/cubepresentation",
+  },
+  {
+    name: "Selective BufferGeometry",
+     link: "/showcase/selective-buffergeometry",
+  },
+  {
+    name: "BufferGeometry",
+     link: "/showcase/buffergeometry",
+  },
+  {
+    name: "useFBO",
+     link: "/showcase/usefbo",
+  },
+  {
+    name: "gomi",
+     link: "/showcase/gomi",
+  },
+  {
+    name: "CanvasTexture",
+     link: "/showcase/canvastexture",
   }
 ]
+
 export default function Showcase() {
   return (
     <>
