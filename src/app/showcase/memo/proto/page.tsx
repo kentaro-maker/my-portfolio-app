@@ -68,7 +68,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Memo(props: JSX.IntrinsicElements["group"]) {
+function Memo(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/ColorBlock.gltf") as GLTFResult;
   
   return (
