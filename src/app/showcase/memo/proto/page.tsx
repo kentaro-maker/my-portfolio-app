@@ -47,7 +47,7 @@ const Page = () => {
         <Cube />
         <ContactShadows frames={1} position={[0, -0.5, 0]} blur={1} opacity={0.75} />
         <OrbitControls minPolarAngle={0} maxPolarAngle={Math.PI / 2.1} />
-        <Model scale={0.2} position={[0,0,2]}/>
+        <Memo scale={0.2} position={[0,0,2]}/>
       </Canvas>
     </>
   )
@@ -68,7 +68,7 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Model(props: JSX.IntrinsicElements["group"]) {
+export function Memo(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/ColorBlock.gltf") as GLTFResult;
   
   return (
