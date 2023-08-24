@@ -10,7 +10,7 @@ import * as fabric from 'fabric'; // v6
 import { Canvas, context, useFrame } from "@react-three/fiber";
 import { Box, ContactShadows, Environment, OrbitControls, Plane, PresentationControls, Wireframe } from "@react-three/drei";
 
-const spacemono = Space_Mono({weight:"400"})
+const spacemono = Space_Mono({weight:"400",   subsets: ['latin']})
 
 const INCH = 25.4 // mm
 

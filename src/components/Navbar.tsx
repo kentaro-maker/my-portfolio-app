@@ -5,6 +5,8 @@ import { ZCOOL_QingKe_HuangYou, Long_Cang } from 'next/font/google'
 
 const zcool = ZCOOL_QingKe_HuangYou({
   weight: '400',
+  subsets: ['latin']
+
 })
 
 const Navbar = ({title = 'Title'}: {title?:string}) => {

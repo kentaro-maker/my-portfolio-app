@@ -5,9 +5,10 @@ import { ZCOOL_QingKe_HuangYou, Long_Cang } from 'next/font/google'
 
 const zcool = ZCOOL_QingKe_HuangYou({
   weight: '400',
+  subsets: ['latin']
 })
 
-const longcang = Long_Cang({weight: '400'})
+const longcang = Long_Cang({weight: '400',  subsets: ['latin']})
 
 
 export default function Home() {

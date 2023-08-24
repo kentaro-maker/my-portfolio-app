@@ -6,7 +6,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, useTexture, Stage } from '@react-three/drei'
 import * as THREE from 'three'
 
-const synomono = Syne_Mono({weight:"400"})
+const synomono = Syne_Mono({weight:"400",subsets: ['latin']})
 const width = 210
 const height = 297
 
