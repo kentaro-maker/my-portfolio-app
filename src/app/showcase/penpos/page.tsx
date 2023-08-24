@@ -16,7 +16,7 @@ const Page = () => {
       <Suspense fallback={null}>
         <Canvas shadows dpr={[1, 2]} camera={{ fov: 50 }}>
           <Stage preset="rembrandt" intensity={1}  environment="city">
-            <Model />
+            <Pen />
           </Stage>
           <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
         </Canvas>
@@ -48,7 +48,7 @@ type MySpringValues = SpringValues<{
 }>
 
 
-export function Model(props: JSX.IntrinsicElements["group"]) {
+function Pen(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/model/paperpen.gltf") as GLTFResult;
   
   const key_filter = ['ArrowDown','ArrowUp','ArrowLeft','ArrowRight',' ']
